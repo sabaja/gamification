@@ -1,6 +1,7 @@
 package microservice.book.gamification.domain;
 
 import java.io.Serializable;
+import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -47,6 +48,6 @@ public final class BadgeCard implements Serializable {
 	}
 
 	public BadgeCard(final Long userId, final Badge badge) {
-		this(null, userId, System.currentTimeMillis(), badge);
+		this(null, userId, Instant.now().toEpochMilli(), badge);
 	}
 }

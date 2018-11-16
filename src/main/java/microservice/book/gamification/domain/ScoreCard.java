@@ -1,6 +1,7 @@
 package microservice.book.gamification.domain;
 
 import java.io.Serializable;
+import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,7 +52,7 @@ public final class ScoreCard implements Serializable {
 	}
 
 	public ScoreCard(final Long userId, final Long attemptId) {
-		this(null, userId, attemptId, System.currentTimeMillis(), DEFAULT_SCORE);
+		this(null, userId, attemptId, Instant.now().toEpochMilli(), DEFAULT_SCORE);
 	}
 
 }

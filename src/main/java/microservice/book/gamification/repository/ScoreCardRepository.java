@@ -1,4 +1,4 @@
-package microservice.book.gamification.repository;
+ package microservice.book.gamification.repository;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import microservice.book.gamification.domain.LeaderBoardRow;
-import microservice.book.gamification.domain.ScoreCard;
+import microservice.book.gamification.entity.ScoreCard;
 
 /**
  * Handles CRUD operations with ScoreCards

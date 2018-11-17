@@ -1,4 +1,4 @@
-package microservice.book.gamification.domain;
+package microservice.book.gamification.entity;
 
 import java.io.Serializable;
 import java.time.Instant;

@@ -16,7 +16,7 @@ import lombok.ToString;
 import microservice.book.gamification.domain.Badge;
 
 /**
- * This class links a Badge to a User. Contains also a timestamp with the moment
+ * This class links a {@link Badge} to a User. Contains also a timestamp with the moment
  * in which the user got it.
  */
 @RequiredArgsConstructor

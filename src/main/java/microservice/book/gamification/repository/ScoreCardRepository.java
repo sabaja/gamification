@@ -22,7 +22,7 @@ public interface ScoreCardRepository extends JpaRepository<ScoreCard, Long> {
 	 *            the id of the user for which the total score should be retrieved
 	 * @return the total score for the given user
 	 */
-	@Query("SELECT SUM(s.score) FROM microservice.book.gamification.domain.ScoreCard s WHERE s.userID :userId GROUP BY s.userId")
+	@Query("SELECT SUM(s.score) FROM microservice.book.gamification.domain.entity.ScoreCard s WHERE s.userID :userId GROUP BY s.userId")
 	public int getTotalScoreForUser(@Param("userID") final Long userId);
 
 	/**
@@ -31,7 +31,7 @@ public interface ScoreCardRepository extends JpaRepository<ScoreCard, Long> {
 	 * 
 	 * @return the leader board, sorted by highest score first.
 	 */
-	@Query("SELECT NEW microservices.book.gamification.domain.LeaderBoardRow(s.userId, SUM(s.score)) "
+	@Query("SELECT NEW microservice.book.gamification.domain.LeaderBoardRow(s.userId, SUM(s.score)) "
 			+ "FROM microservices.book.gamification.domain.ScoreCard s "
 			+ "GROUP BY s.userId ORDER BY SUM(s.score) DESC")
 	List<LeaderBoardRow> findFirst10();

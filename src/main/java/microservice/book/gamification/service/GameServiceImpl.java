@@ -54,15 +54,16 @@ public class GameServiceImpl implements GameService {
 		// Badges depending on score
 		checkAndGiveBadgeBasedOnScore(badgeCardList, Badge.BRONZE_MULTIPLICATOR, totalScore, 100, userId)
 				.ifPresent(badgeCards::add);
-		checkAndGiveBadgeBasedOnScore(badgeCardList, Badge.SILVER_MULTIPLICATOR, totalScore, 100, userId)
+		checkAndGiveBadgeBasedOnScore(badgeCardList, Badge.SILVER_MULTIPLICATOR, totalScore, 250, userId)
 				.ifPresent(badgeCards::add);
-		checkAndGiveBadgeBasedOnScore(badgeCardList, Badge.GOLD_MULTIPLICATOR, totalScore, 100, userId)
+		checkAndGiveBadgeBasedOnScore(badgeCardList, Badge.GOLD_MULTIPLICATOR, totalScore, 600, userId)
 				.ifPresent(badgeCards::add);
 
 		// First won badge
-		if (scoreCardList.size() == 1 && this.containsBadge(badgeCardList, Badge.FIRST_WON)) {
+		if (scoreCardList.size() == 1 && !this.containsBadge(badgeCardList, Badge.FIRST_WON)) {
 			BadgeCard firstWonBadge = this.giveBadgeToUser(Badge.FIRST_WON, userId);
 			badgeCards.add(firstWonBadge);
+			log.info("Fisrt won for user {}", userId);
 		}
 
 		return badgeCards;
@@ -70,8 +71,9 @@ public class GameServiceImpl implements GameService {
 
 	@Override
 	public GameStats retrieveStasForUser(final Long userId) {
-		// TODO Auto-generated method stub
-		return null;
+		int score = this.scoreCardRepository.getTotalScoreForUser(userId);
+		List<BadgeCard> badgeCards = this.badgeCardRepository.findByUserIdOrderByBadgeTimestampDesc(userId);
+		return new GameStats(userId, score, badgeCards.stream().map(BadgeCard::getBadge).collect(Collectors.toList()));
 	}
 
 	/**
@@ -80,8 +82,8 @@ public class GameServiceImpl implements GameService {
 	 * are met.
 	 */
 	private Optional<BadgeCard> checkAndGiveBadgeBasedOnScore(final List<BadgeCard> badgeCards, final Badge badge,
-			final int score, final int scoreThreshold, final Long userId) {
-		if (score >= scoreThreshold && !containsBadge(badgeCards, badge)) {
+			final int totalScore, final int scoreThreshold, final Long userId) {
+		if (totalScore >= scoreThreshold && !containsBadge(badgeCards, badge)) {
 			return Optional.of(giveBadgeToUser(badge, userId));
 		}
 		return Optional.empty();

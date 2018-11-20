@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,6 +23,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 @Entity
+@Table(name = "SCORE_CARD")
 public final class ScoreCard implements Serializable {
 
 	private static final long serialVersionUID = -8110821707173595409L;

@@ -2,7 +2,6 @@ package microservice.book.gamification.repository;
 
 import java.util.List;
 
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,12 +15,20 @@ import microservice.book.gamification.entity.ScoreCard;
 public interface ScoreCardRepository extends JpaRepository<ScoreCard, Long> {
 
 	/**
-	 * Gets the total score for a given user, being the sum of the scores of all his
-	 * ScoreCards.
+	 * soluzione Errore Invocation of init method failed; nested exception is
+	 * java.lang.IllegalArgumentException: Validation failed for query for method
+	 * public abstract java.util.List:
+	 * 
+	 * https://stackoverflow.com/questions/44647630/validation-failed-for-query-for-method-jpql?rq=1
+	 * https://www.baeldung.com/jpa-sql-resultset-mapping 
+	 * 
+	 * Gets the total score for a
+	 * 	 * given user, being the sum of the scores of all his ScoreCards.
 	 * 
 	 * @param userId
 	 *            the id of the user for which the total score should be retrieved
 	 * @return the total score for the given user
+	 * 
 	 */
 	@Query("SELECT SUM(s.score) FROM microservice.book.gamification.domain.entity.ScoreCard s WHERE s.userID :userId GROUP BY s.userId")
 	public int getTotalScoreForUser(@Param("userID") final Long userId);
@@ -36,7 +43,6 @@ public interface ScoreCardRepository extends JpaRepository<ScoreCard, Long> {
 			+ "FROM microservices.book.gamification.domain.ScoreCard s "
 			+ "GROUP BY s.userId ORDER BY SUM(s.score) DESC")
 	public List<LeaderBoardRow> findFirst10();
-
 
 	/**
 	 * Retrieves all the ScoreCards for a given user, identified by his user id.

@@ -23,11 +23,5 @@ public class LeaderBoardServiceImpl implements LeaderBoardService {
 		return scoreCardRepository.findFirst10();
 	}
 
-	@Override
-	public List<LeaderBoardRow> getCurrentLeaderBoard(final int page, final int size) throws Exception {
-		log.info("getCurrentLeaderBoard called with page: " + page + " size: " + size);
-		return this.scoreCardRepository.retrieveLeaderBoardPaged(PageRequest.of(page, size));
-	}
-
 	
 }

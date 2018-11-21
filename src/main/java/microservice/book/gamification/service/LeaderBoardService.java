@@ -16,14 +16,5 @@ public interface LeaderBoardService {
 	 */
 	public List<LeaderBoardRow> getCurrentLeaderBoard();
 
-	/**
-	 * https://stackoverflow.com/questions/20679237/jpql-limit-query
-	 * Retrieves the current leader board with N° score users
-	 * 
-	 * @return the users with the highest score
-	 * 
-	 */
-	public List<LeaderBoardRow> getCurrentLeaderBoard(final int page,
-            final int size) throws Exception;
 
 }

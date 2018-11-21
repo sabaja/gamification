@@ -26,15 +26,4 @@ public class LeaderBoardController {
 		return this.leaderBoardService.getCurrentLeaderBoard();
 	}
 
-	/**
-	 * https://stackoverflow.com/questions/20679237/jpql-limit-query
-	 * @param num
-	 * @return
-	 * @throws Exception 
-	 */
-	@GetMapping(value = "/leaders")
-	public List<LeaderBoardRow> leaders(final @RequestParam(name = "page") int page,
-            final @RequestParam(name = "size") int size) throws Exception {
-		return leaderBoardService.getCurrentLeaderBoard(page, size);
-	}
 }

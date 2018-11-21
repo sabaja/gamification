@@ -15,7 +15,6 @@ import microservice.book.gamification.entity.ScoreCard;
  */
 public interface ScoreCardRepository extends JpaRepository<ScoreCard, Long> {
 
-	
 	/**
 	 * Gets the total score for a given user, being the sum of the scores of all his
 	 * ScoreCards.
@@ -36,7 +35,7 @@ public interface ScoreCardRepository extends JpaRepository<ScoreCard, Long> {
 	@Query("SELECT NEW microservice.book.gamification.domain.LeaderBoardRow(s.userId, SUM(s.score)) "
 			+ "FROM microservices.book.gamification.domain.ScoreCard s "
 			+ "GROUP BY s.userId ORDER BY SUM(s.score) DESC")
-	List<LeaderBoardRow> findFirst10();
+	public List<LeaderBoardRow> findFirst10();
 
 	/**
 	 * 
@@ -49,7 +48,7 @@ public interface ScoreCardRepository extends JpaRepository<ScoreCard, Long> {
 	@Query("SELECT NEW microservice.book.gamification.domain.LeaderBoardRow(s.userId, SUM(s.score)) "
 			+ "FROM microservices.book.gamification.domain.ScoreCard s "
 			+ "GROUP BY s.userId ORDER BY SUM(s.score) DESC")
-	List<LeaderBoardRow> retrieveLeaderBoardPaged(final Pageable page);
+	public List<LeaderBoardRow> retrieveLeaderBoardPaged(final Pageable page);
 
 	/**
 	 * Retrieves all the ScoreCards for a given user, identified by his user id.
@@ -59,5 +58,5 @@ public interface ScoreCardRepository extends JpaRepository<ScoreCard, Long> {
 	 * @return a list containing all the ScoreCards for the given user, sorted by
 	 *         most recent.
 	 */
-	List<ScoreCard> findByUserIdOrderByScoreTimestampDesc(final Long userId);
+	public List<ScoreCard> findByUserIdOrderByScoreTimestampDesc(final Long userId);
 }

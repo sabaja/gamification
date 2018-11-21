@@ -1,9 +1,6 @@
 package microservice.book.gamification.service;
 
 import java.util.List;
-
-import org.springframework.web.bind.annotation.RequestParam;
-
 import microservice.book.gamification.domain.LeaderBoardRow;
 
 /**

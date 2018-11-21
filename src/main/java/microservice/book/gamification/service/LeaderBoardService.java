@@ -1,10 +1,10 @@
 package microservice.book.gamification.service;
 
-import microservice.book.gamification.domain.LeaderBoardRow;
 import java.util.List;
 
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import microservice.book.gamification.domain.LeaderBoardRow;
 
 /**
  * Provides methods to access the LeaderBoard with users and scores.
@@ -26,7 +26,7 @@ public interface LeaderBoardService {
 	 * @return the users with the highest score
 	 * 
 	 */
-
-	public List<LeaderBoardRow> getCurrentLeaderBoard(final int num);
+	public List<LeaderBoardRow> getCurrentLeaderBoard(final int page,
+            final int size) throws Exception;
 
 }

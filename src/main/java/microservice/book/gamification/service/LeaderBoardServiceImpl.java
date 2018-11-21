@@ -3,6 +3,7 @@ package microservice.book.gamification.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 
 import microservice.book.gamification.domain.LeaderBoardRow;
 import microservice.book.gamification.repository.ScoreCardRepository;
@@ -17,11 +18,9 @@ public class LeaderBoardServiceImpl implements LeaderBoardService {
 		return scoreCardRepository.findFirst10();
 	}
 
-	
 	@Override
-	public List<LeaderBoardRow> getCurrentLeaderBoard(int num) {
-		
-		return getCurrentLeaderBoard(num);
+	public List<LeaderBoardRow> getCurrentLeaderBoard(final int page, final int size) throws Exception {
+		return this.scoreCardRepository.retrieveLeaderBoardPaged(PageRequest.of(page, size));
 	}
 
 	

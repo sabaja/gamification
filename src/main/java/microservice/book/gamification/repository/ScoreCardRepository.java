@@ -35,14 +35,15 @@ public interface ScoreCardRepository extends JpaRepository<ScoreCard, Long> {
 	@Query("SELECT NEW microservice.book.gamification.domain.LeaderBoardRow(s.userId, SUM(s.score)) "
 			+ "FROM microservices.book.gamification.domain.ScoreCard s "
 			+ "GROUP BY s.userId ORDER BY SUM(s.score) DESC")
-	public List<LeaderBoardRow> findFirst10();
+	List<LeaderBoardRow> findFirst10();
 
 	/**
 	 * 
 	 * Retrieves a certain amount of {@link LeaderBoardRow} that represent the
 	 * users' ranking and their total score.
 	 * 
-	 * @param page {@link Pageable}
+	 * @param page
+	 *            {@link Pageable}
 	 * @return the leader board, sorted by highest score first.
 	 */
 	@Query("SELECT NEW microservice.book.gamification.domain.LeaderBoardRow(s.userId, SUM(s.score)) "

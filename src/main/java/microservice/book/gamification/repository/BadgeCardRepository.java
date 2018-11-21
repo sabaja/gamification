@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import microservice.book.gamification.entity.BadgeCard;
+import microservice.book.gamification.domain.BadgeCard;
 
 /**
  * Handles data operations with BadgeCards

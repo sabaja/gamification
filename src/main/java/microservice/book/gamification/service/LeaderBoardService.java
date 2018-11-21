@@ -1,6 +1,7 @@
 package microservice.book.gamification.service;
 
 import java.util.List;
+
 import microservice.book.gamification.domain.LeaderBoardRow;
 
 /**

@@ -17,6 +17,11 @@ public interface LeaderBoardService {
 	 */
 	public List<LeaderBoardRow> getCurrentLeaderBoard();
 
+	/**
+	 * Retrieves ceratain number of leader board with the top score users
+	 * 
+	 * @return the users with the highest score
+	 */
 	public List<LeaderBoardRow> getCurrentLeaderBoard(int page, int size) throws Exception;
 
 

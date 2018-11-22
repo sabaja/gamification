@@ -1,4 +1,4 @@
-package microservice.book.gamification.domain;
+package microservice.book.gamification.domain.entity;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -13,6 +13,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+import microservice.book.gamification.domain.Badge;
 
 /**
  * This class links a {@link Badge} to a User. Contains also a timestamp with the moment

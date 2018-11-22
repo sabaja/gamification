@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import microservice.book.gamification.domain.Badge;
-import microservice.book.gamification.domain.BadgeCard;
 import microservice.book.gamification.domain.GameStats;
-import microservice.book.gamification.domain.ScoreCard;
+import microservice.book.gamification.domain.entity.BadgeCard;
+import microservice.book.gamification.domain.entity.ScoreCard;
 import microservice.book.gamification.repository.BadgeCardRepository;
 import microservice.book.gamification.repository.ScoreCardRepository;
 

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import microservice.book.gamification.domain.LeaderBoardRow;
-import microservice.book.gamification.domain.ScoreCard;
+import microservice.book.gamification.domain.entity.ScoreCard;
 
 /**
  * Handles CRUD operations with ScoreCards
@@ -28,7 +28,7 @@ public interface ScoreCardRepository extends JpaRepository<ScoreCard, Long> {
 	 *
 	 *         https://stackoverflow.com/questions/34744033/use-nativequery-true-with-query-in-spring-boot-does-not-work
 	 */
-	@Query("SELECT SUM(s.score) FROM microservice.book.gamification.domain.ScoreCard s WHERE s.userId = :userId GROUP BY s.userId")
+	@Query("SELECT SUM(s.score) FROM microservice.book.gamification.domain.entity.ScoreCard s WHERE s.userId = :userId GROUP BY s.userId")
 	int getTotalScoreForUser(@Param("userId") final Long userId);
 
 	
@@ -42,7 +42,7 @@ public interface ScoreCardRepository extends JpaRepository<ScoreCard, Long> {
 	 * @return the leader board, sorted by highest score first.
 	 */
 	@Query(value = "SELECT NEW microservice.book.gamification.domain.LeaderBoardRow(s.userId, SUM(s.score)) "
-			+ "FROM microservice.book.gamification.domain.ScoreCard s "
+			+ "FROM microservice.book.gamification.domain.entity.ScoreCard s "
 			+ "GROUP BY s.userId ORDER BY SUM(s.score) DESC")
 	public List<LeaderBoardRow> retrieveLeaderBoardPaged(final Pageable page);
 
@@ -61,7 +61,7 @@ public interface ScoreCardRepository extends JpaRepository<ScoreCard, Long> {
 	 * @return the leader board, sorted by highest score first.
 	 */
 	@Query(value = "SELECT NEW microservice.book.gamification.domain.LeaderBoardRow(s.userId, SUM(s.score)) "
-			+ "FROM microservice.book.gamification.domain.ScoreCard s "
+			+ "FROM microservice.book.gamification.domain.entity.ScoreCard s "
 			+ "GROUP BY s.userId ORDER BY SUM(s.score) DESC")
 	List<LeaderBoardRow> findFirst10();
 

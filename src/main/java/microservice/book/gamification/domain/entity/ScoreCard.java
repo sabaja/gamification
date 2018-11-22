@@ -1,4 +1,4 @@
-package microservice.book.gamification.domain;
+package microservice.book.gamification.domain.entity;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -23,7 +23,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode
 @Entity
-//@Table(name = "SCORE_CARD")
+@Table(name = "SCORE_CARD")
 public final class ScoreCard implements Serializable {
 
 	private static final long serialVersionUID = -8110821707173595409L;

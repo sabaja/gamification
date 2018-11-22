@@ -1,12 +1,9 @@
 package microservice.book.gamification.repository;
 
 import java.util.List;
-
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import microservice.book.gamification.domain.LeaderBoardRow;
@@ -15,7 +12,7 @@ import microservice.book.gamification.domain.ScoreCard;
 /**
  * Handles CRUD operations with ScoreCards
  */
-public interface ScoreCardRepository extends CrudRepository<ScoreCard, Long> {
+public interface ScoreCardRepository extends JpaRepository<ScoreCard, Long> {
 
 	/**
 	 * 

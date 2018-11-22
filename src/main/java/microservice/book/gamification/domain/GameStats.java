@@ -8,8 +8,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
-import microservice.book.gamification.entity.BadgeCard;
-import microservice.book.gamification.entity.ScoreCard;
 
 /**
  * This object contains the result of one or many iterations of the game. It may

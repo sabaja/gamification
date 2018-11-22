@@ -12,7 +12,6 @@ import microservice.book.gamification.repository.ScoreCardRepository;
 @Service
 public class LeaderBoardServiceImpl implements LeaderBoardService {
 
-	@Autowired
 	private ScoreCardRepository scoreCardRepository;
 
 	@Override
@@ -24,6 +23,5 @@ public class LeaderBoardServiceImpl implements LeaderBoardService {
 	public List<LeaderBoardRow> getCurrentLeaderBoard(final int page, final int size) throws Exception {
 		return this.scoreCardRepository.retrieveLeaderBoardPaged(PageRequest.of(page, size));
 	}
-
 	
 }

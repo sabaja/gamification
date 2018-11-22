@@ -29,9 +29,8 @@ public interface ScoreCardRepository extends CrudRepository<ScoreCard, Long> {
 	 *
 	 *         https://stackoverflow.com/questions/34744033/use-nativequery-true-with-query-in-spring-boot-does-not-work
 	 */
-//	@Query(nativeQuery = true, value = "SELECT SUM(s.score) FROM microservice.book.gamification.domain.entity.ScoreCard s WHERE s.userID :userId GROUP BY s.userId")
-	@Query("SELECT SUM(s.score) FROM microservice.book.gamification.domain.entity.ScoreCard s WHERE s.userID :userId GROUP BY s.userId")
-	int getTotalScoreForUser(@Param("userID") final Long userId);
+	@Query("SELECT SUM(s.score) FROM microservice.book.gamification.domain.ScoreCard s WHERE s.userId = :userId GROUP BY s.userId")
+	int getTotalScoreForUser(@Param("userId") final Long userId);
 
 	/**
 	 * soluzione Errore Invocation of init method failed; nested exception is
@@ -41,8 +40,8 @@ public interface ScoreCardRepository extends CrudRepository<ScoreCard, Long> {
 	 * 
 	 * @return the leader board, sorted by highest score first.
 	 */
-	@Query(nativeQuery = true, value = "SELECT NEW microservice.book.gamification.domain.LeaderBoardRow(s.userId, SUM(s.score)) "
-			+ "FROM microservices.book.gamification.domain.ScoreCard s "
+	@Query(value = "SELECT NEW microservice.book.gamification.domain.LeaderBoardRow(s.userId, SUM(s.score)) "
+			+ "FROM microservice.book.gamification.domain.ScoreCard s "
 			+ "GROUP BY s.userId ORDER BY SUM(s.score) DESC")
 	List<LeaderBoardRow> findFirst10();
 

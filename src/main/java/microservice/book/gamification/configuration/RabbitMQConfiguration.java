@@ -9,9 +9,16 @@ import org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistrar;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.converter.MappingJackson2MessageConverter;
+import org.springframework.messaging.handler.annotation.support.DefaultMessageHandlerMethodFactory;
 
 /**
  * Configures RabbitMQ to use events in our application.
+ * 
+ * Implementing RabbitListenerConfigurer then we found
+ * RabbitListenerContainerFactory to use or for registering Rabbit endpoints in
+ * a programmatic fashion as opposed to the declarative approach of using the
+ * {@link RabbitListener} annotation.
  */
 @Configuration
 public class RabbitMQConfiguration implements RabbitListenerConfigurer {
@@ -51,10 +58,30 @@ public class RabbitMQConfiguration implements RabbitListenerConfigurer {
 		return BindingBuilder.bind(queue).to(exchange).with(routingKey);
 	}
 
-	@Override
-	public void configureRabbitListeners(RabbitListenerEndpointRegistrar registrar) {
-		// TODO Auto-generated method stub
+	/**
+	 * To convert json Seralization/Deserialization for consumer
+	 * 
+	 * @return
+	 */
+	@Bean
+	public MappingJackson2MessageConverter consumerJackson2MessageConverter() {
+		return new MappingJackson2MessageConverter();
+	}
 
+	@Bean
+	public DefaultMessageHandlerMethodFactory messageHandlerMethodFactory() {
+		DefaultMessageHandlerMethodFactory factory = new DefaultMessageHandlerMethodFactory();
+		factory.setMessageConverter(consumerJackson2MessageConverter());
+		return factory;
+	}
+
+	/**
+	 * We need to configure the RabbitListenerEndpointRegistrar in a way that uses a
+	 * MappingJackson2MessageConverter
+	 */
+	@Override
+	public void configureRabbitListeners(final RabbitListenerEndpointRegistrar registrar) {
+		registrar.setMessageHandlerMethodFactory(messageHandlerMethodFactory());
 	}
 
 }

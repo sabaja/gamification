@@ -1,4 +1,4 @@
-package microservice.book.gamification.configuration;
+package microservices.book.gamification.configuration;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -24,7 +24,7 @@ import org.springframework.messaging.handler.annotation.support.DefaultMessageHa
 public class RabbitMQConfiguration implements RabbitListenerConfigurer {
 
 	/**
-	 * 1 - Bean for existing Multiplication Topic Exchange
+	 * 1 - Bean for binding existing Multiplication Topic Exchange
 	 * 
 	 * @param exchangeName
 	 * @return
@@ -35,7 +35,7 @@ public class RabbitMQConfiguration implements RabbitListenerConfigurer {
 	}
 
 	/**
-	 * 2 - Bean for existing Queue Multiplication, we make it durable so if the
+	 * 2 - Bean for binding existing Queue Multiplication, we make it durable so if the
 	 * broker goes down we can still process it.
 	 * 
 	 * @param exchangeName

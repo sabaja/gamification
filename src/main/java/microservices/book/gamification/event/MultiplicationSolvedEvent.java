@@ -1,4 +1,4 @@
-package microservice.book.gamification.event;
+package microservices.book.gamification.event;
 
 import java.io.Serializable;
 

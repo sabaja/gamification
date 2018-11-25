@@ -1,10 +1,10 @@
-package microservice.book.gamification.repository;
+package microservices.book.gamification.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import microservice.book.gamification.domain.entity.BadgeCard;
+import microservices.book.gamification.domain.entity.BadgeCard;
 
 /**
  * Handles data operations with BadgeCards

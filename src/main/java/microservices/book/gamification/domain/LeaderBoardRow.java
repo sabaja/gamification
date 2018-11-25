@@ -1,4 +1,4 @@
-package microservice.book.gamification.domain;
+package microservices.book.gamification.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

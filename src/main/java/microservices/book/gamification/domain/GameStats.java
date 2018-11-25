@@ -1,4 +1,4 @@
-package microservice.book.gamification.domain;
+package microservices.book.gamification.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,8 +8,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
-import microservice.book.gamification.domain.entity.BadgeCard;
-import microservice.book.gamification.domain.entity.ScoreCard;
+import microservices.book.gamification.domain.entity.BadgeCard;
+import microservices.book.gamification.domain.entity.ScoreCard;
 
 /**
  * This object contains the result of one or many iterations of the game. It may

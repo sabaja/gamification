@@ -1,4 +1,4 @@
-package microservice.book.gamification.domain;
+package microservices.book.gamification.domain;
 
 /**
  * Enumeration with the different types of Badges that a user can win.

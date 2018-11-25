@@ -1,8 +1,8 @@
-package microservice.book.gamification.service;
+package microservices.book.gamification.service;
 
 import java.util.List;
 
-import microservice.book.gamification.domain.LeaderBoardRow;
+import microservices.book.gamification.domain.LeaderBoardRow;
 
 /**
  * Provides methods to access the LeaderBoard with users and scores.

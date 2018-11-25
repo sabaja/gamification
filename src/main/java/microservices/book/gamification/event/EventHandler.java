@@ -1,11 +1,11 @@
-package microservice.book.gamification.event;
+package microservices.book.gamification.event;
 
 import org.springframework.amqp.AmqpRejectAndDontRequeueException;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
-import microservice.book.gamification.service.GameService;
+import microservices.book.gamification.service.GameService;
 
 @Slf4j
 @Component

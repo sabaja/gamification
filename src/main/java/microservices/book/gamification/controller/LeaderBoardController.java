@@ -1,4 +1,4 @@
-package microservice.book.gamification.controller;
+package microservices.book.gamification.controller;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import microservice.book.gamification.domain.LeaderBoardRow;
-import microservice.book.gamification.service.LeaderBoardService;
+import microservices.book.gamification.domain.LeaderBoardRow;
+import microservices.book.gamification.service.LeaderBoardService;
 
 @RestController
 @RequestMapping(value = "/leaders")

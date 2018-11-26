@@ -1,4 +1,4 @@
-package microservice.book.gamification;
+package microservices.book.gamification;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

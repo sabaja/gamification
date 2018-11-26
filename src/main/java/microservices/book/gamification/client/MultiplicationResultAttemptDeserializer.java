@@ -33,8 +33,11 @@ public class MultiplicationResultAttemptDeserializer extends JsonDeserializer<Mu
 			throws IOException, JsonProcessingException {
 		ObjectCodec objectCodec = jsonParser.getCodec();
 		JsonNode node = objectCodec.readTree(jsonParser);
-		return new MultiplicationResultAttempt(node.get("user").get("alias").asText(), node.get("factorA").asInt(),
-				node.get("factorB").asInt(), node.get("resultAttempt").asInt(), node.get("correct").asBoolean());
+		return new MultiplicationResultAttempt(node.get("user").get("alias").asText(),
+				node.get("factorA").asInt(),
+				node.get("factorB").asInt(), 
+				node.get("resultAttempt").asInt(), 
+				node.get("correct").asBoolean());
 	}
 
 }

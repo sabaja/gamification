@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
+import microservices.book.gamification.client.MultiplicationResultAtemptClient;
+import microservices.book.gamification.client.dto.MultiplicationResultAttempt;
 import microservices.book.gamification.domain.Badge;
 import microservices.book.gamification.domain.GameStats;
 import microservices.book.gamification.domain.entity.BadgeCard;
@@ -15,16 +18,28 @@ import microservices.book.gamification.domain.entity.ScoreCard;
 import microservices.book.gamification.repository.BadgeCardRepository;
 import microservices.book.gamification.repository.ScoreCardRepository;
 
+/**
+ * Representation of business logic
+ * 
+ * @author sabaja
+ *
+ */
 @Service
 @Slf4j
 public class GameServiceImpl implements GameService {
 
+	private static final int LUCKY_NUMB = 42;
+
 	private ScoreCardRepository scoreCardRepository;
 	private BadgeCardRepository badgeCardRepository;
+	private MultiplicationResultAtemptClient resultAttempt;
 
-	public GameServiceImpl(ScoreCardRepository scoreCardRepository, BadgeCardRepository badgeCardRepository) {
+	@Autowired
+	public GameServiceImpl(ScoreCardRepository scoreCardRepository, BadgeCardRepository badgeCardRepository,
+			MultiplicationResultAtemptClient resultAttempt) {
 		this.scoreCardRepository = scoreCardRepository;
 		this.badgeCardRepository = badgeCardRepository;
+		this.resultAttempt = resultAttempt;
 	}
 
 	@Override
@@ -66,6 +81,14 @@ public class GameServiceImpl implements GameService {
 			log.info("Fisrt won for user {}", userId);
 		}
 
+		MultiplicationResultAttempt result = this.resultAttempt.retrieveMultiplicationResultAttemptById(attemptId);
+		if (!this.containsBadge(badgeCardList, Badge.LUCKY_NUMBER) && (result.getMultiplicationFactorA() != LUCKY_NUMB
+				|| result.getMultiplicationFactorB() != LUCKY_NUMB)) {
+			BadgeCard luckyNumberBadge = this.giveBadgeToUser(Badge.LUCKY_NUMBER, userId);
+			badgeCards.add(luckyNumberBadge);
+			log.info("Lucky Number {} for user {}", LUCKY_NUMB, userId);
+		}
+
 		return badgeCards;
 	}
 
@@ -101,8 +124,7 @@ public class GameServiceImpl implements GameService {
 	 */
 	private BadgeCard giveBadgeToUser(final Badge badge, final Long userId) {
 		BadgeCard badgeCard = new BadgeCard(userId, badge);
-		badgeCardRepository.save(badgeCard);
-		log.info("User with id {} won a new badge: {}", userId, badge);
+		log.info("User with id {} won a new badge: {}", userId, badgeCardRepository.save(badgeCard));
 		return badgeCard;
 	}
 }

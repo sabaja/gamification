@@ -5,12 +5,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import lombok.extern.slf4j.Slf4j;
 import microservices.book.gamification.client.dto.MultiplicationResultAttempt;
 
 /**
  * This implementation of MultiplicationResultAttemptClient interface connects to
  * the Multiplication microservice via REST.
  */
+@Slf4j
 @Component
 public class MultiplicationResultAttemptClientImpl implements MultiplicationResultAtemptClient {
 
@@ -27,6 +29,7 @@ public class MultiplicationResultAttemptClientImpl implements MultiplicationResu
 
 	@Override
 	public MultiplicationResultAttempt retrieveMultiplicationResultAttemptById(Long multiplicationResultAttemptId) {
+		log.info("called: {}", multiplicationHost + "/results/" + multiplicationResultAttemptId);
 		return restTemplate.getForObject(multiplicationHost + "/results/" + multiplicationResultAttemptId,
 				MultiplicationResultAttempt.class);
 	}

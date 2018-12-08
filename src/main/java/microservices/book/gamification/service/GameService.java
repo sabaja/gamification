@@ -7,7 +7,7 @@ import microservices.book.gamification.domain.GameStats;
  */
 public interface GameService {
 
-	 /**
+    /**
      * Process a new attempt from a given user.
      *
      * @param userId    the user's unique id
@@ -16,12 +16,13 @@ public interface GameService {
      *
      * @return a {@link GameStats} object containing the new score and badge cards obtained
      */
-	public GameStats newAttemptForUser(final Long userId, final Long attemprId, final boolean correct);
-	
-	/**
+    GameStats newAttemptForUser(Long userId, Long attemptId, boolean correct);
+
+    /**
      * Gets the game statistics for a given user
      * @param userId the user
      * @return the total statistics for that user
      */
-	public GameStats retrieveStasForUser(final Long userId);
+    GameStats retrieveStatsForUser(Long userId);
+
 }

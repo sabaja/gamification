@@ -14,7 +14,7 @@ import microservices.book.gamification.client.dto.MultiplicationResultAttempt;
  */
 @Slf4j
 @Component
-public class MultiplicationResultAttemptClientImpl implements MultiplicationResultAtemptClient {
+public class MultiplicationResultAttemptClientImpl implements MultiplicationResultAttemptClient {
 
 	private final RestTemplate restTemplate;
 	private final String multiplicationHost;
@@ -22,16 +22,14 @@ public class MultiplicationResultAttemptClientImpl implements MultiplicationResu
 	@Autowired
 	public MultiplicationResultAttemptClientImpl(final RestTemplate restTemplate,
 			@Value("${multiplicationHost}") final String multiplicationHost) {
-		super();
 		this.restTemplate = restTemplate;
 		this.multiplicationHost = multiplicationHost;
 	}
 
-	@Override
-	public MultiplicationResultAttempt retrieveMultiplicationResultAttemptById(Long multiplicationResultAttemptId) {
-		log.info("called: {}", multiplicationHost + "/results/" + multiplicationResultAttemptId);
-		return restTemplate.getForObject(multiplicationHost + "/results/" + multiplicationResultAttemptId,
-				MultiplicationResultAttempt.class);
-	}
-
+    @Override
+    public MultiplicationResultAttempt retrieveMultiplicationResultAttemptbyId(final Long multiplicationResultAttemptId) {
+        return restTemplate.getForObject(
+                multiplicationHost + "/results/" + multiplicationResultAttemptId,
+                MultiplicationResultAttempt.class);
+    }
 }

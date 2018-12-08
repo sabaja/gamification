@@ -35,14 +35,14 @@ public class RabbitMQConfiguration implements RabbitListenerConfigurer {
 	}
 
 	/**
-	 * 2 - Bean for binding existing Queue Multiplication, we make it durable so if the
-	 * broker goes down we can still process it.
+	 * 2 - Bean for binding existing Queue Multiplication, we make it durable so if
+	 * the broker goes down we can still process it.
 	 * 
 	 * @param exchangeName
 	 * @return
 	 */
 	@Bean
-	public Queue multiplicationQueue(@Value("${multiplication.queue}") final String queueName) {
+	public Queue gamificationMultiplicationQueue(@Value("${multiplication.queue}") final String queueName) {
 		return new Queue(queueName, true);
 	}
 

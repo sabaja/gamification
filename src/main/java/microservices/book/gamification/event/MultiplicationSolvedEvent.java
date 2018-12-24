@@ -17,7 +17,11 @@ import java.io.Serializable;
 @EqualsAndHashCode
 class MultiplicationSolvedEvent implements Serializable {
 
-    private final Long multiplicationResultAttemptId;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7213852059842340086L;
+	private final Long multiplicationResultAttemptId;
     private final Long userId;
     private final boolean correct;
 

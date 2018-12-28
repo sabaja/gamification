@@ -54,7 +54,7 @@ public class RabbitMQConfiguration implements RabbitListenerConfigurer {
 	 */
 	@Bean
 	public Binding binding(final Queue queue, final TopicExchange exchange,
-			@Value("${multiplication.anything.routing-key}") final String routingKey) {
+			@Value("${multiplication.solved.key}") final String routingKey) {
 		return BindingBuilder.bind(queue).to(exchange).with(routingKey);
 	}
 

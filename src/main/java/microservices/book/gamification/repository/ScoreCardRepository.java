@@ -1,17 +1,17 @@
 package microservices.book.gamification.repository;
 
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import microservices.book.gamification.domain.LeaderBoardRow;
 import microservices.book.gamification.domain.ScoreCard;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
-
-import java.util.List;
 
 /**
  * Handles CRUD operations with ScoreCards
  */
-public interface ScoreCardRepository extends CrudRepository<ScoreCard, Long> {
+public interface ScoreCardRepository extends JpaRepository<ScoreCard, Long> {
 
     /**
      * Gets the total score for a given user, being the sum of the scores of all his ScoreCards.

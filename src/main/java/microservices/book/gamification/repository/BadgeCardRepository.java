@@ -1,14 +1,14 @@
 package microservices.book.gamification.repository;
 
-import microservices.book.gamification.domain.BadgeCard;
-import org.springframework.data.repository.CrudRepository;
-
 import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import microservices.book.gamification.domain.BadgeCard;
 
 /**
  * Handles data operations with BadgeCards
  */
-public interface BadgeCardRepository extends CrudRepository<BadgeCard, Long> {
+public interface BadgeCardRepository extends JpaRepository<BadgeCard, Long> {
 
     /**
      * Retrieves all BadgeCards for a given user.

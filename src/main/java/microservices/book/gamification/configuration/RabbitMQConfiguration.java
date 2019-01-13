@@ -33,7 +33,8 @@ public class RabbitMQConfiguration implements RabbitListenerConfigurer {
 	public TopicExchange multiplicationExchange(@Value("${multiplication.exchange}") final String exchangeName) {
 		return new TopicExchange(exchangeName);
 	}
-
+	
+	
 	/**
 	 * 2 - Bean for binding existing Queue Multiplication, we make it durable so if
 	 * the broker goes down we can still process it.

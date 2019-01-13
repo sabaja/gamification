@@ -1,14 +1,20 @@
 package microservices.book.gamification.configuration;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.annotation.RabbitListenerConfigurer;
 import org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistrar;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.handler.annotation.support.DefaultMessageHandlerMethodFactory;
 
@@ -33,18 +39,41 @@ public class RabbitMQConfiguration implements RabbitListenerConfigurer {
 	public TopicExchange multiplicationExchange(@Value("${multiplication.exchange}") final String exchangeName) {
 		return new TopicExchange(exchangeName);
 	}
-	
-	
+
 	/**
 	 * 2 - Bean for binding existing Queue Multiplication, we make it durable so if
-	 * the broker goes down we can still process it.
+	 * the broker goes down we can still process it. 
+	 * 
+	 * Dead letter update:
+	 * https://fatihdirlikli.wordpress.com/2016/06/22/spring-rabbit-dead-letter-queue-configuration/
+	 * https://docs.spring.io/autorepo/docs/spring-cloud-stream-binder-rabbit-docs/1.1.0.RELEASE/reference/html/rabbit-dlq-processing.html
 	 * 
 	 * @param exchangeName
 	 * @return
 	 */
 	@Bean
-	public Queue gamificationMultiplicationQueue(@Value("${multiplication.queue}") final String queueName) {
-		return new Queue(queueName, true);
+	@Primary
+	@Qualifier("gamificationMultiplicationQueue")
+	public Queue gamificationMultiplicationQueue(@Value("${multiplication.queue}") final String queueName,
+			@Value("${multiplication.exchange}") final String exchangeName) {
+		Map<String, Object> args = new HashMap<>();
+		args.put("x-dead-letter-exchange", exchangeName);
+		args.put("x-dead-letter-routing-key", deadLetterQueue());
+		return new Queue(queueName, true, false, false, args);
+	}
+
+	/** 
+	 * Dead letter queue 
+	 *
+	 * Dead letter update:
+	 * https://fatihdirlikli.wordpress.com/2016/06/22/spring-rabbit-dead-letter-queue-configuration/
+	 * https://docs.spring.io/autorepo/docs/spring-cloud-stream-binder-rabbit-docs/1.1.0.RELEASE/reference/html/rabbit-dlq-processing.html
+	 * 
+	 */
+	@Bean
+	@Qualifier("deadLetterQueue")
+	public Queue deadLetterQueue() {
+		return new Queue("${deadletter.queue}", true);
 	}
 
 	/**

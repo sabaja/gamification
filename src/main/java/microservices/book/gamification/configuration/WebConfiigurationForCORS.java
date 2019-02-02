@@ -10,19 +10,20 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * https://www.logicbig.com/how-to/code-snippets/jcode-spring-mvc-webmvcconfigurer.html
- 
-     * Enables Cross-Origin Resource Sharing (CORS)
-     * More info: http://docs.spring.io/spring/docs/current/spring-framework-reference/html/cors.html
-     * @param registry
-  
+ * 
+ * Enables Cross-Origin Resource Sharing (CORS) More info:
+ * http://docs.spring.io/spring/docs/current/spring-framework-reference/html/cors.html
+ * 
+ * @param registry
+ * 
  * @author sabaja
  *
  */
-public class WebConfiiguration implements WebMvcConfigurer{
-	
+public class WebConfiigurationForCORS implements WebMvcConfigurer {
+
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-	
+
 		WebMvcConfigurer.super.addCorsMappings(registry);
 		registry.addMapping("/**");
 	}

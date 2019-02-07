@@ -5,8 +5,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@EnableWebMvc
-@Configuration
+//@EnableWebMvc
+//@Configuration
 
 /**
  * https://www.logicbig.com/how-to/code-snippets/jcode-spring-mvc-webmvcconfigurer.html
@@ -19,13 +19,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @author sabaja
  *
  */
-public class WebConfigurationForCORS implements WebMvcConfigurer {
+public class WebConfiguration implements WebMvcConfigurer {
 
-	@Override
-	public void addCorsMappings(CorsRegistry registry) {
-
-		WebMvcConfigurer.super.addCorsMappings(registry);
-		registry.addMapping("/**");
-	}
+//	@Override
+//	public void addCorsMappings(CorsRegistry registry) {
+//
+//		WebMvcConfigurer.super.addCorsMappings(registry);
+//		registry.addMapping("/**");
+//	}
 
 }

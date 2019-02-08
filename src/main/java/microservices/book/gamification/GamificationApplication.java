@@ -4,9 +4,11 @@ import java.io.IOException;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
+@EnableEurekaClient
 public class GamificationApplication {
 
 	public static void main(String[] args) throws IOException {

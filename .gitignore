@@ -2,6 +2,7 @@
 .project
 /target/
 /logs/
+/DB/
 /.settings
 /.factorypath
 /.springBeans

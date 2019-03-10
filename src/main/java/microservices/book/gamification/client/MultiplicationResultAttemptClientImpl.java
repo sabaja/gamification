@@ -5,11 +5,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
 import microservices.book.gamification.client.dto.MultiplicationResultAttempt;
 
 /**
- * This implementation of MultiplicationResultAttemptClient interface connects to
- * the Multiplication microservice via REST.
+ * This implementation of MultiplicationResultAttemptClient interface connects
+ * to the Multiplication microservice via REST.
  */
 @Component
 public class MultiplicationResultAttemptClientImpl implements MultiplicationResultAttemptClient {
@@ -24,10 +26,15 @@ public class MultiplicationResultAttemptClientImpl implements MultiplicationResu
 		this.multiplicationHost = multiplicationHost;
 	}
 
-    @Override
-    public MultiplicationResultAttempt retrieveMultiplicationResultAttemptbyId(final Long multiplicationResultAttemptId) {
-        return restTemplate.getForObject(
-                multiplicationHost + "/results/" + multiplicationResultAttemptId,
-                MultiplicationResultAttempt.class);
-    }
+	@Override
+	@HystrixCommand(fallbackMethod = "defaultResult")
+	public MultiplicationResultAttempt retrieveMultiplicationResultAttemptbyId(
+			final Long multiplicationResultAttemptId) {
+		return restTemplate.getForObject(multiplicationHost + "/results/" + multiplicationResultAttemptId,
+				MultiplicationResultAttempt.class);
+	}
+
+	public MultiplicationResultAttempt defaultResult(final Long multiplicationResultAttemptId) {
+		return new MultiplicationResultAttempt("fakeUser", 10, 10, 100, true);
+	}
 }

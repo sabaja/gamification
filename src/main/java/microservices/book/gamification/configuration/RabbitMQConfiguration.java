@@ -77,7 +77,7 @@ public class RabbitMQConfiguration implements RabbitListenerConfigurer {
 	}
 
 	/**
-	 * 3 - Binding existing Queue Multiplication
+	 * 3 - Binding existing Queue to the Exchange 
 	 * 
 	 * @param exchangeName
 	 * @return

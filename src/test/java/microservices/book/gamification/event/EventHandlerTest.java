@@ -1,6 +1,8 @@
 package microservices.book.gamification.event;
 
 import microservices.book.gamification.domain.GameStats;
+import microservices.book.gamification.event.EventHandler;
+import microservices.book.gamification.event.MultiplicationSolvedEvent;
 import microservices.book.gamification.service.GameService;
 import org.junit.Before;
 import org.junit.Test;
